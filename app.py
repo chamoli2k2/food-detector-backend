@@ -10,11 +10,16 @@ import pickle
 # Initialize Flask app
 app = Flask(__name__)
 
-# Load model
-loaded_model = tf.keras.models.load_model("final_model")
+# Load model and dictionary
+loaded_model = None
+index_to_class = None
 
-# Load dictionary
-index_to_class = pickle.load(open('index_to_class.pkl', 'rb'))
+def load_model_and_dictionary():
+    global loaded_model, index_to_class
+    if loaded_model is None:
+        loaded_model = tf.keras.models.load_model("final_model")
+    if index_to_class is None:
+        index_to_class = pickle.load(open('index_to_class.pkl', 'rb'))
 
 # Preprocess image
 def preprocess_image(img):
@@ -26,6 +31,9 @@ def preprocess_image(img):
 # Define route for model prediction
 @app.route('/', methods=['POST'])
 def predict():
+    # Load model and dictionary if not loaded
+    load_model_and_dictionary()
+    
     # Get image data from request
     image_file = request.files['image']
     
