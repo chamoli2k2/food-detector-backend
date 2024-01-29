@@ -16,18 +16,24 @@ loaded_model = tf.keras.models.load_model("final_model")
 # Load dictionary
 index_to_class = pickle.load(open('index_to_class.pkl', 'rb'))
 
+# Preprocess image
+def preprocess_image(img):
+    img = img.resize((224, 224))  # Resize image
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    return preprocess_input(img_array)
+
 # Define route for model prediction
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['POST'])
 def predict():
     # Get image data from request
     image_file = request.files['image']
     
     # Load image
     img = Image.open(BytesIO(image_file.read()))
-    img = img.resize((224, 224))  # Pass image data to load_img
-    img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array = preprocess_input(img_array)
+    
+    # Preprocess image
+    img_array = preprocess_image(img)
     
     # Make predictions
     predictions = loaded_model.predict(img_array)
