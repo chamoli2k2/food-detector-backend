@@ -31,17 +31,25 @@ def preprocess_image(img):
 # Define route for model prediction
 @app.route('/', methods=['POST'])
 def predict():
-    # Load model and dictionary if not loaded
-    load_model_and_dictionary()
+
+    if 'image' not in request.files:
+        return jsonify({'class': 'image not found'}) , 400
     
     # Get image data from request
     image_file = request.files['image']
+
+    allowed_extensions = {'jpg', 'jpeg', 'png'}  # Add more if needed
+    if image_file.filename.split('.')[-1].lower() not in allowed_extensions:
+        return jsonify({'class': 'invalid image format'}) , 400
     
     # Load image
     img = Image.open(BytesIO(image_file.read()))
     
     # Preprocess image
     img_array = preprocess_image(img)
+
+    # Load model and dictionary if not loaded
+    load_model_and_dictionary()
     
     # Make predictions
     predictions = loaded_model.predict(img_array)
@@ -53,4 +61,4 @@ def predict():
 
 # Run the Flask app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)
