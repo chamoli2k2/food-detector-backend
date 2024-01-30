@@ -31,8 +31,6 @@ def preprocess_image(img):
 # Define route for model prediction
 @app.route('/', methods=['POST'])
 def predict():
-    # Load model and dictionary if not loaded
-    load_model_and_dictionary()
 
     if 'image' not in request.files:
         return jsonify({'class': 'image not found'}) , 400
@@ -45,6 +43,9 @@ def predict():
     
     # Preprocess image
     img_array = preprocess_image(img)
+
+    # Load model and dictionary if not loaded
+    load_model_and_dictionary()
     
     # Make predictions
     predictions = loaded_model.predict(img_array)
