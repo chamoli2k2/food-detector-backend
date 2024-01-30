@@ -33,6 +33,9 @@ def preprocess_image(img):
 def predict():
     # Load model and dictionary if not loaded
     load_model_and_dictionary()
+
+    if 'image' not in request.files:
+        return jsonify({'class': 'image not found'}) , 400
     
     # Get image data from request
     image_file = request.files['image']
