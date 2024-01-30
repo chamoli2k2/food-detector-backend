@@ -37,6 +37,10 @@ def predict():
     
     # Get image data from request
     image_file = request.files['image']
+
+    allowed_extensions = {'jpg', 'jpeg', 'png'}  # Add more if needed
+    if image_file.filename.split('.')[-1].lower() not in allowed_extensions:
+        return jsonify({'class': 'invalid image format'}) , 400
     
     # Load image
     img = Image.open(BytesIO(image_file.read()))
