@@ -2,6 +2,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ["CUDA_VISIBLE_DEVICES"]="-1" 
 from flask import Flask, request, jsonify,render_template
+from flask_cors import CORS
 import numpy as np
 from keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.preprocessing import image
@@ -16,6 +17,7 @@ import pickle
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 def create_model(num_classes):
     base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
