@@ -54,9 +54,6 @@ if index_to_class is None:
 # Create model
 model=create_model(80)
 
-@app.route('/',methods=['GET'])
-def home():
-    return render_template('index.html')
 # Define route for model prediction
 @app.route('/', methods=['GET','POST'])
 def predict():
