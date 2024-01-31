@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accident Detector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        /* body {
+            background-image: url('https://images.deccanherald.com/deccanherald%2F2023-12%2F4b056b08-4fd7-46ea-9dab-592712e2ce6c%2FiStock_850346406.jpg?rect=0%2C0%2C3100%2C1744&auto=format%2Ccompress&fmt=webp&fit=max&w=1200.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        } */
+
+        .form-container {
+            margin-left: 98px;
+            margin-top: 150px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            width: 383px;
+            height: 290px;
+            border: 2px solid black;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-container">
+        <div class="form-container">
+            <p><span style="font-weight:bold">Message status : </span>{{message.class}}</p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
