@@ -63,15 +63,13 @@ def predict():
 
     if 'image' not in request.files:
         return jsonify({'class': 'image not found'}) , 400
-        # render_template('result.html',{'class': 'image not found'})
     
     # Get image data from request
     image_file = request.files['image']
 
-    allowed_extensions = {'jpg', 'jpeg', 'png'}  # Add more if needed
+    allowed_extensions = {'jpg', 'jpeg', 'png'} 
     if image_file.filename.split('.')[-1].lower() not in allowed_extensions:
         return jsonify({'class': 'invalid image format'}) , 400
-        # render_template('result.html',{'class': 'invalid image format'})
     
     # Load image
     img = Image.open(BytesIO(image_file.read()))
@@ -85,7 +83,6 @@ def predict():
     predicted_class = index_to_class[predicted_class_index]
     
     # Return prediction as JSON response
-    # return render_template('result.html',message = {'class': predicted_class})
     return jsonify({'class':predicted_class})
 
 # Run the Flask app
